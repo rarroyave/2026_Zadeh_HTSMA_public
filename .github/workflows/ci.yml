@@ -1,0 +1,43 @@
+name: reproducibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Reproducibility regression tests
+        run: pytest tests/ -v
+
+      - name: Reproduce manuscript Table 5
+        run: python scripts/compute_spearman_mae.py
+
+      - name: Reproduce champion-alloy lambda_2 and eps_tr
+        run: python scripts/compute_lambda2_eps_tr.py
+
+      - name: Reproduce four-target hit rates
+        run: python scripts/compute_four_pass_rates.py
+
+      - name: Execute reproducibility notebook end-to-end
+        run: jupyter nbconvert --to notebook --execute --stdout notebooks/reproduce_manuscript_figures.ipynb > /dev/null

@@ -1,0 +1,11 @@
+{
+  "champion_lattice": {"a0": 3.09013, "a": 3.09851, "b": 4.12942, "c": 4.90601, "beta": 103.046},
+  "champion_lambda2": 0.9449,
+  "champion_eps_tr_110_tension_pct": 12.263,
+  "rho_Ms_by_iteration": {
+    "Iteration 1": 0.248,
+    "Iteration 2": 0.267,
+    "Iteration 3": 0.732
+  },
+  "n_alloys_after_dedup": 87
+}
