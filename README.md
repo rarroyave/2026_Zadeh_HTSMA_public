@@ -164,13 +164,39 @@ manuscript.
 
 ## Credits
 
-This reproducibility bundle relies heavily on **S. Hossein Zadeh's** prior
-methodological work, without which the paper this repository accompanies
-would not exist. Three of the four vendored subdirectories are verbatim
-snapshots of his publicly-released model repositories, and the corresponding
-methods (CatBoost transformation-temperature prediction, `lambda_2` phase
-compatibility, theoretical transformation strain) form the property-
-prediction backbone of the Bayesian-optimization campaign:
+This paper and its reproducibility bundle are the result of a multi-year
+collaborative effort. Contributions by author (in paper order):
+
+- **S. Hossein Zadeh** --- first author; developed the three surrogate
+  models (CatBoost transformation temperatures, `lambda_2` phase
+  compatibility, theoretical `eps_tr`) that form the property-prediction
+  backbone; led ML/BO integration. Framed the unified multi-source
+  optimization workflow in his 2026 Texas A&M Ph.D. dissertation, "Multi-
+  Source Optimization Framework for Materials Discovery in Multi-Component
+  NiTi Shape Memory Alloys."
+- **John Broucek** --- led the experimental synthesis and characterization
+  of the 87 MPE HTSMAs (vacuum arc melting, DSC, UCFTC per ASTM E3097,
+  XRD, SEM/EDX).
+- **Cem Cakirhan** --- experimental synthesis and characterization support.
+- **Mingqian Li** --- computational support (feature engineering, ML
+  model integration).
+- **Danial Khatamsaz** --- primary code author of the
+  Bayesian-optimization campaign engine under
+  `vendored/NiTi-alloy-discovery/`: Gaussian-process surrogates,
+  multi-objective EHVI acquisition, reification-based information fusion,
+  feasibility-probability sub-pipeline.
+- **Xiaoning Qian** --- co-supervisor; Bayesian-optimization and
+  Gaussian-process methodology.
+- **Ibrahim Karaman** --- corresponding author (materials-science side);
+  experimental campaign design and mechanical-behaviour interpretation.
+- **Raymundo Arroyave** --- corresponding author (computational side);
+  overall project direction, ICME/BO framework, and this reproducibility
+  bundle.
+
+### Software attribution
+
+The property-prediction models used throughout this repository are
+Sina Zadeh's publicly-released work:
 
 - [github.com/sinazadeh/CatBoost-SMAs](https://github.com/sinazadeh/CatBoost-SMAs)
   --- transformation-temperature surrogate
@@ -182,28 +208,16 @@ prediction backbone of the Bayesian-optimization campaign:
   --- theoretical single-crystal `eps_tr` calculator
   (Zadeh et al., in preparation).
 
-The unified `Multi-Source Optimization Framework for Materials Discovery in
-Multi-Component NiTi Shape Memory Alloys` --- Sina's 2026 Ph.D. dissertation
-at Texas A&M University --- integrates these three methods into the closed-
-loop discovery workflow demonstrated in this paper. If you use any part of
-`vendored/Phase-Compatibility-Model-NiTi/`,
-`vendored/Transformation-Strain-Model-NiTi/`, or their calculators exposed
-via `scripts/compute_lambda2_eps_tr.py`, please cite the corresponding paper
-above.
-
-The Bayesian-optimization campaign engine under
-`vendored/NiTi-alloy-discovery/` was primarily authored by
-**Danial Khatamsaz** (Gaussian-process surrogates, multi-objective EHVI
-acquisition, reification-based information fusion, feasibility-probability
-sub-pipeline). See `vendored/NiTi-alloy-discovery/NOTICE.md` for the full
-attribution.
+The BO campaign engine at `vendored/NiTi-alloy-discovery/` was primarily
+authored by Danial Khatamsaz. See each vendored directory's `NOTICE.md`
+for the pinned upstream commit and full attribution.
 
 ## Citing
 
-If this dataset or these scripts are useful to you, please cite the paper
-(above), the vendored calculator whose numbers you reproduce (Sina's
+If you use this dataset or these scripts, please cite the paper (above),
+the vendored calculator whose numbers you reproduce (Sina Zadeh's
 publications), and, if you use the BO loop, the paper's methods section
-(Khatamsaz + Zadeh + Arroyave).
+(Khatamsaz + Zadeh + team).
 
 ## Contact
 
