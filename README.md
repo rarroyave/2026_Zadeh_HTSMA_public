@@ -4,8 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Data: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-<!-- Replace the pending DOI badge below once a Zenodo release is minted. -->
-[![DOI](https://img.shields.io/badge/DOI-pending-lightgrey.svg)](#)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22256930.svg)](https://doi.org/10.5281/zenodo.22256930)
 
 Public companion to:
 
