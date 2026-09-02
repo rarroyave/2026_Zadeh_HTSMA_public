@@ -162,11 +162,48 @@ manuscript.
 - [Transformation-Strain-Model-NiTi](https://github.com/sinazadeh/Transformation-Strain-Model-NiTi)
   (Zadeh et al., in preparation). Vendored as a submodule.
 
+## Credits
+
+This reproducibility bundle relies heavily on **S. Hossein Zadeh's** prior
+methodological work, without which the paper this repository accompanies
+would not exist. Three of the four vendored subdirectories are verbatim
+snapshots of his publicly-released model repositories, and the corresponding
+methods (CatBoost transformation-temperature prediction, `lambda_2` phase
+compatibility, theoretical transformation strain) form the property-
+prediction backbone of the Bayesian-optimization campaign:
+
+- [github.com/sinazadeh/CatBoost-SMAs](https://github.com/sinazadeh/CatBoost-SMAs)
+  --- transformation-temperature surrogate
+  (Zadeh et al., *Comput. Mater. Sci.* 226 (2023) 112225).
+- [github.com/sinazadeh/Phase-Compatibility-Model-NiTi](https://github.com/sinazadeh/Phase-Compatibility-Model-NiTi)
+  --- `lambda_1`, `lambda_2`, `lambda_3` calculator
+  (Zadeh et al., *Mater. Des.* 244 (2024) 113096).
+- [github.com/sinazadeh/Transformation-Strain-Model-NiTi](https://github.com/sinazadeh/Transformation-Strain-Model-NiTi)
+  --- theoretical single-crystal `eps_tr` calculator
+  (Zadeh et al., in preparation).
+
+The unified `Multi-Source Optimization Framework for Materials Discovery in
+Multi-Component NiTi Shape Memory Alloys` --- Sina's 2026 Ph.D. dissertation
+at Texas A&M University --- integrates these three methods into the closed-
+loop discovery workflow demonstrated in this paper. If you use any part of
+`vendored/Phase-Compatibility-Model-NiTi/`,
+`vendored/Transformation-Strain-Model-NiTi/`, or their calculators exposed
+via `scripts/compute_lambda2_eps_tr.py`, please cite the corresponding paper
+above.
+
+The Bayesian-optimization campaign engine under
+`vendored/NiTi-alloy-discovery/` was primarily authored by
+**Danial Khatamsaz** (Gaussian-process surrogates, multi-objective EHVI
+acquisition, reification-based information fusion, feasibility-probability
+sub-pipeline). See `vendored/NiTi-alloy-discovery/NOTICE.md` for the full
+attribution.
+
 ## Citing
 
 If this dataset or these scripts are useful to you, please cite the paper
-(above) and any submodule you exercise (see each submodule's README for the
-correct citation).
+(above), the vendored calculator whose numbers you reproduce (Sina's
+publications), and, if you use the BO loop, the paper's methods section
+(Khatamsaz + Zadeh + Arroyave).
 
 ## Contact
 
