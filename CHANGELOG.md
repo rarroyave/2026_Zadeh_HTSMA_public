@@ -6,6 +6,35 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] --- 2026-09-02
+
+### Added
+
+- `vendored/NiTi-alloy-discovery/` --- vendored snapshot of the
+  Bayesian-optimization campaign engine (upstream commit `28dbc74`), with the
+  Iter2 and Iter3 loop code, Gaussian-process surrogate, multi-objective
+  acquisition (EHVI), reification-based information fusion, feasibility
+  probability sub-pipeline, and per-iteration campaign state. Primary code
+  contributor: Danial Khatamsaz. MIT-licensed under authority of the paper's
+  author team.
+- `requirements-bo.txt` --- optional dependencies (`george`, `pyDOE`,
+  `scikit-learn-extra`) for running the BO loop.
+- README section "Re-running the Bayesian-optimization campaign" pointing at
+  `Iter{2,3}/main.py`.
+
+### Changes vs. the upstream BO snapshot
+
+- `Iter{2,3}/all_space.csv` (top-level, ~128 MB each) --- stripped. Runtime-
+  derivable from the shipped `feasibles.csv` + `infeasibles.csv` via
+  `np.concatenate`, so not needed to run the top-level BO loop.
+- `Iter{2,3}/Probability_calculations/itr{2,3}/all_space.csv` (~128 MB
+  each) --- not shipped; regenerable as a byte-exact 3,812,408-row set via
+  `vendored/NiTi-alloy-discovery/generate_design_space.py` in ~15 s. The
+  generator was derived from Sina's dissertation Section 4.2.3 and
+  cross-validated against the original CSV. See the vendored `NOTICE.md`
+  for the full spec and reproduction instructions.
+- `Iter3/Summary.pptx` --- stripped. Personal working slide deck.
+
 ## [0.1.0] --- 2026-09-01
 
 Initial release accompanying manuscript submission.

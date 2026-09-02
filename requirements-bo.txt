@@ -1,0 +1,7 @@
+# Optional: install alongside requirements.txt only if you want to run the
+# Bayesian optimization loop under vendored/NiTi-alloy-discovery/.
+# Not needed for reproducing the manuscript's numeric results.
+
+george>=0.4          # Gaussian process regression (Foreman-Mackey)
+pyDOE>=0.3           # Latin hypercube sampling for initial designs
+scikit-learn-extra>=0.3  # KMedoids clustering used inside the BO loop

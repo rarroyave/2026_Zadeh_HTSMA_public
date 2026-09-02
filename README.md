@@ -25,7 +25,8 @@ the specific numerical results reported in Section 3 and Appendix A.
 ├── README.md               (this file)
 ├── LICENSE                 MIT (code) / CC BY 4.0 (data --- see data/README.md)
 ├── CITATION.cff            citation metadata
-├── requirements.txt        Python dependencies
+├── requirements.txt        Python dependencies for the analysis scripts + notebook
+├── requirements-bo.txt     extra deps for the Bayesian-optimization campaign code
 ├── data/
 │   ├── supplementary_data.xlsx    87 alloys x DSC + UCFTC + ML preds + XRD
 │   └── README.md                  data dictionary
@@ -37,19 +38,18 @@ the specific numerical results reported in Section 3 and Appendix A.
 ├── notebooks/
 │   └── reproduce_manuscript_figures.ipynb
 ├── .github/workflows/ci.yml            GitHub Actions CI (Py 3.10, 3.11, 3.12)
-└── vendored/                           verbatim snapshots of upstream models
-    ├── Phase-Compatibility-Model-NiTi/     (Zadeh et al., Mater. Des. 244, 2024)
-    └── Transformation-Strain-Model-NiTi/   (Zadeh et al., in preparation)
+└── vendored/                           verbatim snapshots of related repos
+    ├── Phase-Compatibility-Model-NiTi/     lambda_1/2/3 calculator (Mater. Des. 244, 2024)
+    ├── Transformation-Strain-Model-NiTi/   eps_tr calculator (in preparation)
+    └── NiTi-alloy-discovery/               Bayesian-optimization campaign engine
 ```
 
-The `vendored/` directories are verbatim snapshots of Zadeh et al.'s
-publicly-released, MIT-licensed models for phase compatibility (lambda_1,
-lambda_2, lambda_3) and theoretical transformation strain (eps_tr). Each
-subdirectory carries its own `LICENSE` and a `NOTICE.md` recording the
-upstream repository URL and the exact commit SHA it was taken from. Vendoring
-these here (rather than referencing them as git submodules) makes the archive
-self-contained --- a download from Zenodo will still work if the upstream
-GitHub repos ever move or disappear.
+The `vendored/` directories are snapshots of related MIT-licensed repositories
+that this bundle depends on. Each subdirectory carries its own `LICENSE` and
+a `NOTICE.md` recording the upstream repository URL and the exact commit SHA
+it was taken from. Vendoring these here (rather than referencing them as git
+submodules) makes the archive self-contained --- a download from Zenodo will
+still work if the upstream GitHub repos ever move or disappear.
 
 ## Install
 
@@ -57,6 +57,13 @@ GitHub repos ever move or disappear.
 git clone <this repo>
 cd 2026_Zadeh_HTSMA_public
 pip install -r requirements.txt
+```
+
+To additionally run the Bayesian-optimization campaign under
+`vendored/NiTi-alloy-discovery/`:
+
+```bash
+pip install -r requirements-bo.txt
 ```
 
 ## Reproduce the manuscript numbers
@@ -92,6 +99,27 @@ Reports the fraction of alloys in each iteration that jointly satisfy:
 M_s in [200, 400] deg C, DeltaT (UCFTC) <= 50 deg C, DeltaH >= 20 J/g,
 eps_tr >= 2.5%. Iteration 1's 21% joint pass rate is the calibration point
 for Appendix A.
+
+## Re-running the Bayesian-optimization campaign
+
+The BO loop that drove the alloy selection across three iterations is under
+`vendored/NiTi-alloy-discovery/`. From either iteration directory:
+
+```bash
+cd vendored/NiTi-alloy-discovery/Iter2   # or Iter3
+python main.py
+```
+
+The loop reads the tested-alloy outcomes (`o1_GT_y.csv`, `o2_GT_y.csv`,
+`o3_GT_y.csv` for the three objectives --- minimize hysteresis, maximize
+enthalpy, maximize transformation strain) and the feasibility labels
+(`feasibles.csv` / `infeasibles.csv`) that come out of the probability
+sub-pipeline in `Probability_calculations/`, fits a Gaussian-process
+surrogate, and proposes the next batch. Iteration 1 was the initial design
+(Latin-hypercube batch) that seeded the campaign and did not require the BO
+loop; see the vendored
+directory's `NOTICE.md` for the full contents map and for the list of large
+intermediate CSVs that were stripped and are regenerable at runtime.
 
 ## Rendered walk-through
 
