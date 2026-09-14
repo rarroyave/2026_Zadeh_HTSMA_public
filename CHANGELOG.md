@@ -6,6 +6,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.3] --- 2026-09-14
+
 ### Changed
 
 - The supplementary ΔH analysis is now summarized in Appendix B of the revised
