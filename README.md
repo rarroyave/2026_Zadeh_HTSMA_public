@@ -186,7 +186,7 @@ campaign model is as good or better, consistent with the manuscript's use of the
 surrogates as rank-ordering priors. The six descriptors selected for the
 literature data do not transfer better than plain composition. The test sets are
 small (23--26 alloys) and the ΔH range is narrow, so these numbers are
-indicative only. The script needs `catboost` and HEACalculator 1.3.0.
+indicative only. The script needs `catboost`, `scikit-learn`, and HEACalculator 1.3.0.
 
 ## Licensing
 

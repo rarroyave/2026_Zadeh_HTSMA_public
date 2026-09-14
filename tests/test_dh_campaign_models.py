@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 pytest.importorskip("catboost")
+pytest.importorskip("sklearn")
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))

@@ -11,7 +11,7 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `scripts/train_dh_on_campaign.py`: supplementary analysis, not reported in
   the manuscript, that trains ΔH models on the campaign's measured alloys and
   compares them with the ΔH predictions used during the campaign. A test runs a
-  shortened version, and CI installs `catboost` for it.
+  shortened version, and CI installs `catboost` and `scikit-learn` for it.
 
 ## [0.3.1] --- 2026-09-14
 

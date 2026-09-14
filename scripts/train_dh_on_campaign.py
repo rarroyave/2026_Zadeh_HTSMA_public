@@ -22,7 +22,7 @@ Evaluation
     forward-in-time split (Iteration 1 -> 2, Iterations 1+2 -> 3)
 
 Usage:  python train_dh_on_campaign.py [--data path] [--repeats 10] [--out DIR]
-Requires catboost (see requirements-ml.txt) and HEACalculator 1.3.0.
+Requires catboost and scikit-learn (see requirements-ml.txt) and HEACalculator 1.3.0.
 """
 import argparse
 import contextlib
