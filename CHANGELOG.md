@@ -13,6 +13,12 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   compares them with the ΔH predictions used during the campaign. A test runs a
   shortened version, and CI installs `catboost` and `scikit-learn` for it.
 
+### Fixed
+
+- Pin `pandas<3`. CBFV 1.1, which the vendored helper modules use to generate
+  composition features, fails under pandas 3 (`TypeError: unhashable type:
+  'StringArray'`); CI on Python 3.11 and 3.12 had started resolving pandas 3.0.
+
 ## [0.3.1] --- 2026-09-14
 
 ### Added
