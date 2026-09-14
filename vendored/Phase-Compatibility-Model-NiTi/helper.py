@@ -7,7 +7,7 @@
 import pandas as pd
 from CBFV import composition
 from functools import reduce
-from HEACalculator import HEACalculator
+from heacalc_compat import HEACalculator  # vendoring patch, see NOTICE.md
 import numpy as np
 import math
 import contextlib

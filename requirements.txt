@@ -8,7 +8,10 @@ pytest>=7
 
 # Required transitively by the vendored PCM and TSM helper.py modules
 CBFV>=1.1
-HEACalculator>=2.0
+# HEACalculator (GPL-3.0) is installed separately. The helpers need its 1.3.0
+# interface, whose package metadata pins pandas==1.4.1, so install it without
+# dependencies (its core needs only numpy):
+#   pip install --no-deps "HEACalculator @ git+https://github.com/dogusariturk/HEACalculator@v.1.3.0"
 
 # CBFV 1.1 imports pkg_resources, which setuptools>=81 removed. Pin below.
 setuptools<81

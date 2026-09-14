@@ -40,13 +40,13 @@ the specific numerical results reported in Section 3 and Appendix A.
 └── vendored/                           verbatim snapshots of related repos
     ├── Phase-Compatibility-Model-NiTi/     lambda_1/2/3 calculator (Mater. Des. 244, 2024)
     ├── Transformation-Strain-Model-NiTi/   eps_tr calculator (in preparation)
-    └── NiTi-alloy-discovery/               Bayesian-optimization campaign engine
+    └── NiTi-alloy-discovery/               Bayesian-optimization campaign engine and ML-model code
 ```
 
 The `vendored/` directories are snapshots of related MIT-licensed repositories
 that this bundle depends on. Each subdirectory carries its own `LICENSE` and
-a `NOTICE.md` recording the upstream repository URL and the exact commit SHA
-it was taken from. Vendoring these here (rather than referencing them as git
+a `NOTICE.md` recording the upstream repository URL, the exact commit SHA
+it was taken from, and any local patches. Vendoring these here (rather than referencing them as git
 submodules) makes the archive self-contained --- a download from Zenodo will
 still work if the upstream GitHub repos ever move or disappear.
 
@@ -56,6 +56,7 @@ still work if the upstream GitHub repos ever move or disappear.
 git clone <this repo>
 cd 2026_Zadeh_HTSMA_public
 pip install -r requirements.txt
+pip install --no-deps "HEACalculator @ git+https://github.com/dogusariturk/HEACalculator@v.1.3.0"
 ```
 
 To additionally run the Bayesian-optimization campaign under
@@ -147,6 +148,9 @@ manuscript.
 ## Licensing
 
 - **Code** (this repo, minus `vendored/`) --- MIT License (`LICENSE`).
+- **HEACalculator** (Doguhan Sariturk, GPL-3.0) is a separately installed
+  dependency and is not redistributed here; `heacalc_compat.py` adapts its
+  published 1.3.0 interface for the vendored helper modules.
 - **Data** (`data/supplementary_data.xlsx`) --- CC BY 4.0. Please cite the paper.
 - **Vendored submodules** --- separately MIT-licensed by S. Hossein Zadeh.
   See each submodule's own `LICENSE` file.

@@ -3,10 +3,11 @@
 This directory contains a snapshot of
 
 - Upstream repository: https://github.com/sinazadeh/NiTi-alloy-discovery
-- Upstream commit: `28dbc74b3d7dc4c3cb65ff9f694f8e69919b22ce`
-- License: MIT (see `LICENSE` in this directory; the upstream repo did not
-  carry an explicit license at snapshot time, so this MIT license is applied
-  by the paper's author team, which owns the underlying work)
+- Upstream commit: `2e5ef7a9c599e5b7e767f7b45a7f454d768051e2`
+- License: MIT (see `LICENSE` in this directory, copied from upstream). The
+  earlier snapshot shipped in v0.2.0 and v0.3.0 (upstream `28dbc74`) predates
+  the upstream license file and carried an MIT license applied by the paper's
+  author team.
 
 Vendored here so this reproducibility bundle is self-contained --- a
 download from Zenodo does not depend on GitHub still hosting the upstream
@@ -38,9 +39,25 @@ Danial Khatamsaz (`@author` header in `Iter2/main.py`).
   original CSV.
 - `Iter3/Summary.pptx` (~4 MB) --- **stripped**. Personal working slide
   deck, not a reproducibility asset.
+- `ML models/HEACalculator/` --- **not shipped**. It is a locally modified copy
+  (labelled 1.3.1) of Doguhan Sariturk's HEACalculator, which is GPL-3.0. The
+  only functional change from the published 1.3.0 is a `csv` argument and a
+  `get_csv_list()` method. `ML models/heacalc_compat.py` provides that
+  interface on top of the published 1.3.0, and `ML models/helper.py` imports it
+  instead (one-line patch). Install HEACalculator 1.3.0 with
+  `pip install --no-deps "HEACalculator @ git+https://github.com/dogusariturk/HEACalculator@v.1.3.0"`.
+- `ML models/__pycache__/` --- **not shipped** (compiled caches).
 
 ## Contents
 
+- `ML models/` --- feature selection and CatBoost fitting for the
+  transformation-temperature, hysteresis, and enthalpy (ΔH) models
+  (`main.ipynb`), composition and crystallographic feature code (`helper.py`),
+  and Thermo-Calc batch templates for the CALPHAD screening (`template.py`,
+  `template.sh`; require TC-Python and the TCNI12 database). The notebook's
+  training data are read from external spreadsheets and are not included, and
+  no trained model files are provided. Notebook dependencies:
+  `../../requirements-ml.txt`.
 - `Iter2/`, `Iter3/` --- per-iteration BO loop code plus tested-alloy
   outcomes, per-objective ground-truth values, and priors.
 - `Iter{2,3}/main.py` --- BO loop entry point.

@@ -6,6 +6,27 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.1] --- 2026-09-14
+
+### Added
+
+- Snapshot of `ML models/` from `sinazadeh/NiTi-alloy-discovery` (upstream
+  `2e5ef7a`): the notebook and helper code used to select features for and
+  train the transformation-temperature, hysteresis, and ΔH CatBoost models,
+  and the Thermo-Calc templates used for CALPHAD screening. Training data and
+  trained model files are not included.
+- `requirements-ml.txt` for that notebook.
+- Tests that check the HEACalculator compatibility layer against the values
+  of the HEACalculator copy used in the study.
+
+### Fixed
+
+- The vendored helper modules call `HEACalculator(formula, csv=True)`, an
+  interface from an unreleased, locally modified HEACalculator 1.3.1.
+  `HEACalculator>=2.0`, previously listed in `requirements.txt`, rejects the
+  `csv` argument. A compatibility layer now provides identical values from the
+  published HEACalculator 1.3.0, installed from its GitHub tag.
+
 ## [0.3.0] --- 2026-09-13
 
 ### Fixed

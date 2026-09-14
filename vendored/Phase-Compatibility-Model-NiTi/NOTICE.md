@@ -20,3 +20,12 @@ upstream repository rather than modifying this vendored copy.
 > composition-dependent phase compatibility in NiTi shape memory alloys,"
 > Mater. Des. 244 (2024) 113096.
 > https://doi.org/10.1016/j.matdes.2024.113096
+
+## Local patch (v0.3.1)
+
+`helper.py` imports `HEACalculator` from `heacalc_compat.py` (this directory)
+instead of from the HEACalculator package. The helper calls
+`HEACalculator(formula, csv=True).get_csv_list()`, which no published
+HEACalculator release provides; the compatibility layer supplies it on top of
+HEACalculator 1.3.0 with identical values. Install HEACalculator 1.3.0 with
+`pip install --no-deps "HEACalculator @ git+https://github.com/dogusariturk/HEACalculator@v.1.3.0"`.

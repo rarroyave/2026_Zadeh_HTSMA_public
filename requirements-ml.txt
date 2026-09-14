@@ -1,0 +1,9 @@
+# Optional: only needed to run vendored/NiTi-alloy-discovery/ML models/main.ipynb.
+# The notebook also needs its training data, which are not included, and the
+# Thermo-Calc templates need a licensed TC-Python installation with TCNI12.
+catboost
+shap
+scikit-learn
+matplotlib
+gspread
+oauth2client
