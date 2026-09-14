@@ -33,22 +33,27 @@ COMP_COLS = [
 
 
 def load_dsc_dataframe(path: Path) -> pd.DataFrame:
-    """Load 'All Compiled Data' sheet and deduplicate to one row per alloy
-    per iteration (max over multiple DSC cycles)."""
+    """Load cycle-2 DSC measurements and one prediction set per alloy."""
     df = pd.read_excel(path, sheet_name="All Compiled Data", header=39)
     df = df.loc[:, ~df.columns.astype(str).str.contains("Unnamed")]
     df["comp_key"] = df[COMP_COLS].astype(str).agg("|".join, axis=1)
-    grouped = df.groupby(["Iteration", "comp_key"]).agg(
-        {
-            "Transforms": "max",
-            "Ms (°C)": "max",
-            "Af (°C)": "max",
-            "Average Enthalpy (J/g)": "max",
-            "Predicted Ms (°C)": "first",
-            "Predicted Af (°C)": "first",
-            "Predicted Enthalpy (J/g)": "first",
-        }
-    ).reset_index()
+    keys = ["Iteration", "comp_key"]
+    prediction_cols = [
+        "Predicted Ms (°C)",
+        "Predicted Af (°C)",
+        "Predicted Enthalpy (J/g)",
+    ]
+    predictions = df.groupby(keys, as_index=False)[prediction_cols].first()
+    measurements = df[df["DSC Cycle Number"] == 2][
+        keys
+        + [
+            "Transforms",
+            "Ms (°C)",
+            "Af (°C)",
+            "Average Enthalpy (J/g)",
+        ]
+    ].copy()
+    grouped = measurements.merge(predictions, on=keys, how="left")
     grouped["DT_meas"] = grouped["Af (°C)"] - grouped["Ms (°C)"]
     grouped["DT_pred"] = (
         grouped["Predicted Af (°C)"] - grouped["Predicted Ms (°C)"]

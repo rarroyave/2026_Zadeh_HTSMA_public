@@ -7,7 +7,7 @@ authors:
   - family-names: "Broucek"
     given-names: "John"
   - family-names: "Cakirhan"
-    given-names: "Ceylan"
+    given-names: "Cem"
   - family-names: "Li"
     given-names: "Mingqian"
   - family-names: "Khatamsaz"
@@ -18,8 +18,8 @@ authors:
     given-names: "Ibrahim"
   - family-names: "Arroyave"
     given-names: "Raymundo"
-version: "0.1.0"
-date-released: "2026-09-01"
+version: "0.3.0"
+date-released: "2026-09-13"
 license: MIT
 preferred-citation:
   type: article
@@ -30,7 +30,7 @@ preferred-citation:
     - family-names: "Broucek"
       given-names: "John"
     - family-names: "Cakirhan"
-      given-names: "Ceylan"
+      given-names: "Cem"
     - family-names: "Li"
       given-names: "Mingqian"
     - family-names: "Khatamsaz"

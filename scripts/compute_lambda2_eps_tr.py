@@ -2,7 +2,7 @@
 """
 Reproduce the crystallographic-compatibility (lambda_1, lambda_2, lambda_3)
 and theoretical transformation-strain (eps_tr) values for the champion alloy
-Ni46Ti28Hf22Pd2Co2 (and the low-hysteresis reference alloy
+Ni46Ti28Co2Pd2Hf22 (and the low-hysteresis reference alloy
 Ni45Ti25Co5Hf11Zr14) reported in Section 3 of
 
     Zadeh et al., "Bayesian-Optimization-Guided Discovery of
@@ -35,7 +35,7 @@ warnings.filterwarnings("ignore")
 #   a0  = B2 austenite parameter (Angstrom)
 #   a,b,c,beta = B19' martensite parameters
 ALLOYS = {
-    "Ni46Ti28Hf22Pd2Co2 (champion)": dict(
+    "Ni46Ti28Co2Pd2Hf22 (champion)": dict(
         a0=3.09013, a=3.09851, b=4.12942, c=4.90601, beta=103.046,
     ),
     "Ni45Ti25Co5Hf11Zr14 (lowest-DT)": dict(

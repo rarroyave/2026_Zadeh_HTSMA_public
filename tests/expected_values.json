@@ -3,9 +3,27 @@
   "champion_lambda2": 0.9449,
   "champion_eps_tr_110_tension_pct": 12.263,
   "rho_Ms_by_iteration": {
-    "Iteration 1": 0.248,
-    "Iteration 2": 0.267,
-    "Iteration 3": 0.732
+    "Iteration 1": 0.269,
+    "Iteration 2": 0.269,
+    "Iteration 3": 0.715
   },
+  "table5_rho_all": {
+    "Ms": 0.429,
+    "Af": 0.559,
+    "DT": 0.568,
+    "DH": 0.501
+  },
+  "table5_mae_all": {
+    "Ms": 64.692,
+    "Af": 87.128,
+    "DT": 34.361,
+    "DH": 7.267
+  },
+  "four_pass_by_iteration": {
+    "Iteration 1": 6,
+    "Iteration 2": 8,
+    "Iteration 3": 6
+  },
+  "four_pass_total": 20,
   "n_alloys_after_dedup": 87
 }

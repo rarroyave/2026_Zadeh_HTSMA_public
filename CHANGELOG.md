@@ -6,6 +6,25 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.0] --- 2026-09-13
+
+### Fixed
+
+- Aligned the Table 5 surrogate-validation calculation with the DSC method by
+  using second-cycle measurements while retaining one prediction set per
+  alloy. Updated the reproduced rank correlations and absolute errors.
+- Defined the four-target screening hysteresis consistently as second-cycle,
+  stress-free DSC $\Delta T = A_f - M_s$. The corrected per-iteration joint
+  pass counts are 6/29, 8/29, and 6/29 (20 alloys total); the combined
+  BO-guided rate is 14/58 (24%).
+- Corrected a co-author's given name to Cem Cakirhan in `CITATION.cff`.
+- Wrote the champion-alloy formula in the fixed element order,
+  `Ni46Ti28Co2Pd2Hf22`, in the README and scripts.
+
+### Changed
+
+- Re-executed the notebook so its outputs show the corrected values.
+
 ## [0.2.0] --- 2026-09-02
 
 ### Added

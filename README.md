@@ -85,7 +85,7 @@ python scripts/compute_lambda2_eps_tr.py
 ```
 
 Reports lambda_1/lambda_2/lambda_3 and single-crystal eps_tr in five
-crystallographic directions for Ni46Ti28Hf22Pd2Co2 (champion) and
+crystallographic directions for Ni46Ti28Co2Pd2Hf22 (champion) and
 Ni45Ti25Co5Hf11Zr14 (lowest-DeltaT reference).
 
 **Section 3 --- per-iteration four-target hit rates:**
@@ -95,9 +95,9 @@ python scripts/compute_four_pass_rates.py
 ```
 
 Reports the fraction of alloys in each iteration that jointly satisfy:
-M_s in [200, 400] deg C, DeltaT (UCFTC) <= 50 deg C, DeltaH >= 20 J/g,
-eps_tr >= 2.5%. Iteration 1's 21% joint pass rate is the calibration point
-for Appendix A.
+M_s in [200, 400] deg C, second-cycle stress-free DSC
+DeltaT = A_f - M_s <= 50 deg C, DeltaH >= 20 J/g, and eps_tr >= 2.5%.
+Iteration 1's 21% joint pass rate is the calibration point for Appendix A.
 
 ## Re-running the Bayesian-optimization campaign
 
