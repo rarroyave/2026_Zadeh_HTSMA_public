@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Supplementary analysis (not reported in the manuscript): how well can the
+Supplementary analysis (summarized in Appendix B of the revised manuscript): how well can the
 transformation enthalpy DeltaH be predicted from the campaign's own
 measurements?
 

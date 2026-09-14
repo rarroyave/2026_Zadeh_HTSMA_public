@@ -148,7 +148,7 @@ manuscript.
 
 ## Supplementary analysis: ΔH models trained on the campaign data
 
-Not reported in the manuscript. The ΔH predictions used during the campaign came
+Summarized in Appendix B of the revised manuscript. The ΔH predictions used during the campaign came
 from a CatBoost model trained on a larger literature database that is not part
 of this repository. `scripts/train_dh_on_campaign.py` asks how well ΔH can be
 predicted from the campaign's own measurements: the second-cycle DSC

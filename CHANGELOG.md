@@ -6,6 +6,12 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- The supplementary ΔH analysis is now summarized in Appendix B of the revised
+  manuscript. The README and the script docstring say so, instead of "not
+  reported in the manuscript".
+
 ## [0.3.2] --- 2026-09-14
 
 ### Added
