@@ -96,7 +96,8 @@ def fit_predict(name, x_train, y_train, x_test):
         model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3, 3, 25)))
         return model.fit(x_train, y_train).predict(x_test)
     import catboost as cb
-    model = cb.CatBoostRegressor(loss_function="MAE", silent=True, random_seed=0, thread_count=4)
+    model = cb.CatBoostRegressor(loss_function="MAE", silent=True, random_seed=0, thread_count=4,
+                                 allow_writing_files=False)
     return model.fit(x_train, y_train).predict(x_test)
 
 

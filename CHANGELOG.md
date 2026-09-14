@@ -6,6 +6,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.2] --- 2026-09-14
+
 ### Added
 
 - `scripts/train_dh_on_campaign.py`: supplementary analysis, not reported in
