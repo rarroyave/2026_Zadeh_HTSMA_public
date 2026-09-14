@@ -146,6 +146,48 @@ Three regressions verify the champion-alloy lambda_2, the shape of the SI
 table, and the Table 5 rho_Ms progression against the values reported in the
 manuscript.
 
+## Supplementary analysis: ΔH models trained on the campaign data
+
+Not reported in the manuscript. The ΔH predictions used during the campaign came
+from a CatBoost model trained on a larger literature database that is not part
+of this repository. `scripts/train_dh_on_campaign.py` asks how well ΔH can be
+predicted from the campaign's own measurements: the second-cycle DSC
+enthalpies of the 72 transforming alloys with a measured ΔH (23, 23, and 26 in
+Iterations 1--3).
+
+```bash
+python scripts/train_dh_on_campaign.py            # add --out DIR for CSV outputs
+```
+
+Repeated 5-fold cross-validation (10 repeats, folds grouped by composition;
+mean ± sd over repeats). The campaign model's own predictions on the same 72
+alloys give MAE 7.27 J/g (the Table 5 value), R² −1.03, and ρ 0.50.
+
+| Model | MAE (J/g) | RMSE (J/g) | R² | Spearman ρ |
+| --- | ---: | ---: | ---: | ---: |
+| Predict the mean | 4.72 ± 0.06 | 6.30 | -0.03 | -0.18 |
+| Ridge, at.% | 3.62 ± 0.17 | 5.20 | 0.30 | 0.69 |
+| CatBoost, at.% | 3.18 ± 0.13 | 4.17 | 0.55 | 0.70 |
+| CatBoost, six notebook descriptors | 3.77 ± 0.22 | 5.19 | 0.30 | 0.66 |
+
+Forward in time (train on earlier iterations, predict the next one):
+
+| Model | Iter 1 → 2: MAE / ρ | Iter 1+2 → 3: MAE / ρ |
+| --- | ---: | ---: |
+| Predict the mean | 3.87 / – | 5.78 / – |
+| Ridge, at.% | 2.94 / 0.49 | 3.03 / 0.55 |
+| CatBoost, at.% | 3.66 / 0.58 | 3.28 / 0.58 |
+| CatBoost, six notebook descriptors | 3.90 / 0.53 | 4.61 / 0.21 |
+| Campaign model (predictions used in the BO loop) | 6.04 / 0.71 | 4.54 / 0.66 |
+
+Models fitted to the campaign alloys roughly halve the absolute error of the
+literature-trained model. For ranking the next iteration's alloys, however, the
+campaign model is as good or better, consistent with the manuscript's use of the
+surrogates as rank-ordering priors. The six descriptors selected for the
+literature data do not transfer better than plain composition. The test sets are
+small (23--26 alloys) and the ΔH range is narrow, so these numbers are
+indicative only. The script needs `catboost` and HEACalculator 1.3.0.
+
 ## Licensing
 
 - **Code** (this repo, minus `vendored/`) --- MIT License (`LICENSE`).
