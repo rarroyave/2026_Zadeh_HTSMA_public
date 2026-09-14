@@ -16,6 +16,10 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   and the Thermo-Calc templates used for CALPHAD screening. Training data and
   trained model files are not included.
 - `requirements-ml.txt` for that notebook.
+- Snapshot of `sinazadeh/CatBoost-SMAs` (upstream `224ef5d`), the
+  transformation-temperature model and its literature dataset, so all three
+  property predictors cited in the manuscript are archived here. A test checks
+  its hyperparameters against Table B1.
 - Tests that check the HEACalculator compatibility layer against the values
   of the HEACalculator copy used in the study.
 

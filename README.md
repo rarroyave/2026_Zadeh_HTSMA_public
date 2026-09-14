@@ -38,6 +38,7 @@ the specific numerical results reported in Section 3 and Appendix A.
 │   └── reproduce_manuscript_figures.ipynb
 ├── .github/workflows/ci.yml            GitHub Actions CI (Py 3.10, 3.11, 3.12)
 └── vendored/                           verbatim snapshots of related repos
+    ├── CatBoost-SMAs/                      transformation-temperature model (Comput. Mater. Sci. 226, 2023)
     ├── Phase-Compatibility-Model-NiTi/     lambda_1/2/3 calculator (Mater. Des. 244, 2024)
     ├── Transformation-Strain-Model-NiTi/   eps_tr calculator (in preparation)
     └── NiTi-alloy-discovery/               Bayesian-optimization campaign engine and ML-model code
