@@ -18,8 +18,8 @@ authors:
     given-names: "Ibrahim"
   - family-names: "Arroyave"
     given-names: "Raymundo"
-version: "0.3.3"
-date-released: "2026-09-14"
+version: "0.3.4"
+date-released: "2026-09-15"
 license: MIT
 preferred-citation:
   type: article

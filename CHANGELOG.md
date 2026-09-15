@@ -6,6 +6,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.4] --- 2026-09-15
+
 ### Added
 
 - `scripts/compare_lambda2_ldt_models.py`: compares the composition-based
