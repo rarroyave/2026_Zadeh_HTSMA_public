@@ -26,6 +26,13 @@
   },
   "four_pass_total": 20,
   "n_alloys_after_dedup": 87,
+  "pareto_membership": {
+    "tested": [10, 11, 10],
+    "front_after_iteration_2": [3, 5],
+    "on_final_front": [2, 3, 5],
+    "displaced_by_iteration_3": 3,
+    "tail_probability": 0.033
+  },
   "lattice_model_check": {
     "n_alloys": 70,
     "lambda2_rho": 0.493,

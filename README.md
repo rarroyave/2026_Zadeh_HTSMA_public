@@ -32,6 +32,7 @@ the specific numerical results reported in Section 3 and Appendix A.
 ├── scripts/
 │   ├── compute_spearman_mae.py         Table 5 (Spearman rho + MAE)
 │   ├── compute_four_pass_rates.py      Appendix A four-target hit rates
+│   ├── compute_pareto_membership.py    Section 3 / Appendix A.6 Pareto-front membership
 │   ├── compute_lambda2_eps_tr.py       champion-alloy lambda_2 and eps_tr
 │   ├── compare_lambda2_ldt_models.py   lambda_2 and LDT strain models vs measured lattice parameters
 │   └── train_dh_on_campaign.py         supplementary ΔH analysis (Appendix B)
@@ -123,6 +124,20 @@ M_s in [200, 400] deg C, second-cycle stress-free DSC
 DeltaT = A_f - M_s <= 50 deg C, DeltaH >= 20 J/g, and eps_tr >= 2.5%.
 Iteration 1's 21% joint pass rate is the calibration point for Appendix A.
 
+**Section 3 and Appendix A.6 --- Pareto-front membership by iteration:**
+
+```bash
+python scripts/compute_pareto_membership.py
+```
+
+Objective space (-DeltaT, DeltaH, eps_tr) over the 31 strain-tested alloys,
+with DeltaT the midpoint hysteresis A50 - M50 from the second DSC cycle, DeltaH
+the second-cycle average enthalpy, and eps_tr the largest measured
+transformation strain. Reports the cumulative front after Iteration 2
+(8 alloys: 3 from Iteration 1, 5 from Iteration 2), the final front (10 alloys,
+2/3/5 by iteration; rates 0.20/0.27/0.50), the 3 earlier front alloys dominated
+by Iteration 3, and Pr(Z >= 5 | Binomial(10, 0.20)) = 0.033.
+
 ## Re-running the Bayesian-optimization campaign
 
 The BO loop that drove the alloy selection across three iterations is under
@@ -166,7 +181,7 @@ pytest tests/ -v
 
 The tests check the numbers reported in the manuscript: the champion-alloy
 lambda_2 and eps_tr, the shape of the SI table, Table 5, the four-target hit
-rates, the Table B1 hyperparameters in the vendored model code, the
+rates, the Pareto-front membership, the Table B1 hyperparameters in the vendored model code, the
 HEACalculator compatibility layer, the supplementary ΔH analysis, and the
 comparison of the lambda_2 and LDT strain models with measured lattice
 parameters.

@@ -6,6 +6,15 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `scripts/compute_pareto_membership.py`: reproduces the per-iteration
+  Pareto-front membership of Section 3 and Appendix A.6 (fronts of 8 and 10
+  alloys, 2/3/5 split, 3 earlier front alloys dominated, tail probability
+  0.033). Hysteresis in this analysis is the midpoint A50 − M50 from the
+  second DSC cycle, as stated in the revised manuscript. Tested in
+  `tests/test_pareto_membership.py`.
+
 ## [0.3.4] --- 2026-09-15
 
 ### Added
