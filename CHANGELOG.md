@@ -6,6 +6,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.5] --- 2026-09-15
+
 ### Added
 
 - `scripts/compute_pareto_membership.py`: reproduces the per-iteration
