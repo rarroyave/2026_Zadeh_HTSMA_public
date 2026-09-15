@@ -25,5 +25,13 @@
     "Iteration 3": 6
   },
   "four_pass_total": 20,
-  "n_alloys_after_dedup": 87
+  "n_alloys_after_dedup": 87,
+  "lattice_model_check": {
+    "n_alloys": 70,
+    "lambda2_rho": 0.493,
+    "lambda2_mae": 0.0123,
+    "lambda2_vs_dT_rho": -0.439,
+    "strain_rho": 0.921,
+    "strain_mae_pct": 1.08
+  }
 }

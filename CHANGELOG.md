@@ -6,6 +6,21 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `scripts/compare_lambda2_ldt_models.py`: compares the composition-based
+  λ2 model and the LDT transformation-strain model with values computed from
+  the measured B2 and B19′ lattice parameters of the 70 alloys that have them,
+  and reports the rank correlation between measured λ2 and DSC hysteresis
+  (Section 3 and Appendix A.7 of the revised manuscript). Tested in
+  `tests/test_lambda2_ldt_models.py`.
+
+### Fixed
+
+- README: Iteration 1 was K-medoid seeding of the CALPHAD-filtered
+  candidates, not a Latin-hypercube batch; the ρ_Ms progression is 0.27 to
+  0.72 (Table 5), not 0.25 to 0.73.
+
 ## [0.3.3] --- 2026-09-14
 
 ### Changed

@@ -32,7 +32,9 @@ the specific numerical results reported in Section 3 and Appendix A.
 ├── scripts/
 │   ├── compute_spearman_mae.py         Table 5 (Spearman rho + MAE)
 │   ├── compute_four_pass_rates.py      Appendix A four-target hit rates
-│   └── compute_lambda2_eps_tr.py       champion-alloy lambda_2 and eps_tr
+│   ├── compute_lambda2_eps_tr.py       champion-alloy lambda_2 and eps_tr
+│   ├── compare_lambda2_ldt_models.py   lambda_2 and LDT strain models vs measured lattice parameters
+│   └── train_dh_on_campaign.py         supplementary ΔH analysis (Appendix B)
 ├── tests/                              pytest regressions vs. manuscript values
 ├── notebooks/
 │   └── reproduce_manuscript_figures.ipynb
@@ -76,9 +78,29 @@ python scripts/compute_spearman_mae.py
 ```
 
 Reports per-iteration Spearman rho and MAE for M_s, A_f, DeltaT, DeltaH. The
-key result --- Iteration 1 rho_Ms = 0.25 rising to Iteration 3 rho_Ms = 0.73 ---
+key result --- Iteration 1 rho_Ms = 0.27 rising to Iteration 3 rho_Ms = 0.72 ---
 reflects the Bayesian optimization loop adaptively retraining the surrogate
 with each round of new MPE observations.
+
+**Section 3 and Appendix A.7 --- lambda_2 and LDT strain models vs measured lattice parameters:**
+
+```bash
+python scripts/compare_lambda2_ldt_models.py            # add --skip-strain for lambda_2 only, --out DIR for CSVs
+```
+
+For the 70 alloys with measured B2 and B19' lattice parameters (20, 23, and 27
+in Iterations 1--3), compares the composition-based lambda_2 model and the LDT
+transformation-strain model with values computed from those lattice parameters.
+
+| Comparison | Result |
+| --- | --- |
+| lambda_2 model vs measured lambda_2 (70 alloys) | Spearman rho 0.49 (p = 1.4e-5), MAE 0.012 |
+| LDT strain model vs measured-lattice strain (12 directions x tension/compression) | Spearman rho 0.92, MAE 1.08% |
+| Alloys at or above the 2.5% theoretical-strain threshold in every direction and mode | 70/70 (model and measured) |
+| Measured lambda_2 vs DSC hysteresis A_f - M_s | Spearman rho -0.44 (p = 1.4e-4) |
+
+The original accuracy of the lambda_2 model is MAE 0.01 (Mater. Des. 244, 2024).
+The strain part takes a few minutes; the script needs `catboost`.
 
 **Section 3 --- champion-alloy crystallographic compatibility and strain:**
 
@@ -117,8 +139,8 @@ enthalpy, maximize transformation strain) and the feasibility labels
 (`feasibles.csv` / `infeasibles.csv`) that come out of the probability
 sub-pipeline in `Probability_calculations/`, fits a Gaussian-process
 surrogate, and proposes the next batch. Iteration 1 was the initial design
-(Latin-hypercube batch) that seeded the campaign and did not require the BO
-loop; see the vendored
+(K-medoid seeding of the 17,207 CALPHAD-filtered candidates) that seeded the
+campaign and did not require the BO loop; see the vendored
 directory's `NOTICE.md` for the full contents map and for the list of large
 intermediate CSVs that were stripped and are regenerable at runtime.
 
@@ -142,9 +164,12 @@ pip install pytest
 pytest tests/ -v
 ```
 
-Three regressions verify the champion-alloy lambda_2, the shape of the SI
-table, and the Table 5 rho_Ms progression against the values reported in the
-manuscript.
+The tests check the numbers reported in the manuscript: the champion-alloy
+lambda_2 and eps_tr, the shape of the SI table, Table 5, the four-target hit
+rates, the Table B1 hyperparameters in the vendored model code, the
+HEACalculator compatibility layer, the supplementary ΔH analysis, and the
+comparison of the lambda_2 and LDT strain models with measured lattice
+parameters.
 
 ## Supplementary analysis: ΔH models trained on the campaign data
 

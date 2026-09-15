@@ -41,5 +41,8 @@ jobs:
       - name: Reproduce four-target hit rates
         run: python scripts/compute_four_pass_rates.py
 
+      - name: Compare lambda_2 model with measured lattice parameters
+        run: python scripts/compare_lambda2_ldt_models.py --skip-strain  # the full comparison runs in pytest
+
       - name: Execute reproducibility notebook end-to-end
         run: jupyter nbconvert --to notebook --execute --stdout notebooks/reproduce_manuscript_figures.ipynb > /dev/null
