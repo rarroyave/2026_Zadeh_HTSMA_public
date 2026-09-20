@@ -6,6 +6,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.6] --- 2026-09-20
+
 ### Added
 
 - `paper/2026-zadeh-htsma-R1.pdf`: the revised manuscript (R1, clean
