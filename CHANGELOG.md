@@ -6,6 +6,12 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `paper/2026-zadeh-htsma-R1.pdf`: the revised manuscript (R1, clean
+  two-column, no revision markup), so the archived bundle travels with the
+  paper whose numbers it reproduces.
+
 ## [0.3.5] --- 2026-09-15
 
 ### Added

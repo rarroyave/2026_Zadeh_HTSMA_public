@@ -26,6 +26,8 @@ the specific numerical results reported in Section 3 and Appendix A.
 ├── CITATION.cff            citation metadata
 ├── requirements.txt        Python dependencies for the analysis scripts + notebook
 ├── requirements-bo.txt     extra deps for the Bayesian-optimization campaign code
+├── paper/
+│   └── 2026-zadeh-htsma-R1.pdf    revised manuscript (clean, two-column)
 ├── data/
 │   ├── supplementary_data.xlsx    87 alloys x DSC + UCFTC + ML preds + XRD
 │   └── README.md                  data dictionary
@@ -53,6 +55,12 @@ a `NOTICE.md` recording the upstream repository URL, the exact commit SHA
 it was taken from, and any local patches. Vendoring these here (rather than referencing them as git
 submodules) makes the archive self-contained --- a download from Zenodo will
 still work if the upstream GitHub repos ever move or disappear.
+
+## The paper
+
+`paper/2026-zadeh-htsma-R1.pdf` is the revised manuscript (R1) as submitted to
+Acta Materialia, in the clean two-column format without revision markup. The
+numbers reproduced by the scripts below refer to this version.
 
 ## Install
 
