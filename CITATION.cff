@@ -18,7 +18,7 @@ authors:
     given-names: "Ibrahim"
   - family-names: "Arroyave"
     given-names: "Raymundo"
-version: "0.3.6"
+version: "0.3.7"
 date-released: "2026-09-20"
 license: MIT
 preferred-citation:
