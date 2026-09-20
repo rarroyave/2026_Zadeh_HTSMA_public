@@ -6,6 +6,15 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- `paper/2026-zadeh-htsma-R1.pdf`: refreshed to the current build. The
+  bibliography is now generated from `references.bib` via BibTeX rather than
+  maintained inline, so the reference list gained two entries (Olier et al.
+  1997 and Kai et al. 2019, cited in the Ti2Ni-type discussion) and the
+  numbering changed throughout. The response to reviewers was updated to
+  match.
+
 ## [0.3.6] --- 2026-09-20
 
 ### Added
