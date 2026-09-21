@@ -6,6 +6,8 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.3.8] --- 2026-09-21
+
 ### Added
 
 - `scripts/predict_from_composition.py`: predict properties for a single
