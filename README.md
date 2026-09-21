@@ -37,7 +37,9 @@ the specific numerical results reported in Section 3 and Appendix A.
 │   ├── compute_pareto_membership.py    Section 3 / Appendix A.6 Pareto-front membership
 │   ├── compute_lambda2_eps_tr.py       champion-alloy lambda_2 and eps_tr
 │   ├── compare_lambda2_ldt_models.py   lambda_2 and LDT strain models vs measured lattice parameters
-│   └── train_dh_on_campaign.py         supplementary ΔH analysis (Appendix B)
+│   ├── train_dh_on_campaign.py         supplementary ΔH analysis (Appendix B)
+│   ├── train_tt_augmented.py           transformation-temperature model + campaign data
+│   └── predict_from_composition.py     predict properties for one composition
 ├── tests/                              pytest regressions vs. manuscript values
 ├── notebooks/
 │   └── reproduce_manuscript_figures.ipynb
@@ -87,7 +89,7 @@ python scripts/compute_spearman_mae.py
 ```
 
 Reports per-iteration Spearman rho and MAE for M_s, A_f, DeltaT, DeltaH. The
-key result --- Iteration 1 rho_Ms = 0.27 rising to Iteration 3 rho_Ms = 0.72 ---
+key result --- Iteration 1 rho_Ms = 0.27 rising to Iteration 3 rho_Ms = 0.73 ---
 reflects the Bayesian optimization loop adaptively retraining the surrogate
 with each round of new MPE observations.
 
@@ -235,6 +237,64 @@ surrogates as rank-ordering priors. The six descriptors selected for the
 literature data do not transfer better than plain composition. The test sets are
 small (23--26 alloys) and the ΔH range is narrow, so these numbers are
 indicative only. The script needs `catboost`, `scikit-learn`, and HEACalculator 1.3.0.
+
+## Predicting properties for a composition
+
+```bash
+python scripts/predict_from_composition.py --composition Ni46Ti28Co2Pd2Hf22
+python scripts/predict_from_composition.py --at Ni=46 Ti=28 Co=2 Pd=2 Hf=22
+```
+
+Reports λ₂, the theoretical transformation strain, and ΔH for one composition in
+the NiTi(Co,Cu,Pd,Hf,Zr) design space. Every model is trained at call time from
+data in this repository; no pre-trained weights are distributed.
+
+ε_tr is reported as a range rather than a single value. The LDT model resolves
+loading *direction* well (ρ = 0.92 across direction/mode cases) but has no
+alloy-to-alloy skill within a direction, and its twelve sampled directions
+exclude [110], so it is not comparable with the [110] figure quoted in Section 3.
+
+### Transformation temperatures
+
+Add `--with-temperatures` to also predict M_s, M_f, A_s and A_f. This is opt-in
+because it refits the transformation-temperature model, which takes about seven
+minutes, and because it needs a homogenization schedule as well as a
+composition. It defaults to the campaign's 950 °C / 24 h and says so:
+
+```
+Ms/Mf/As/Af : Ms 218   Mf 186   As 229   Af 244 degC
+              assuming 950 degC / 24 h homogenization -- the campaign default, applied
+              because none was given, not because it was measured
+              out-of-sample MAE Ms 53, Mf 50, As 60, Af 62 degC: this ranks
+              candidates, it does not predict pointwise.
+```
+
+Use `--final-ht-temp` and `--final-ht-time` for a different schedule; the script
+then warns, because every multi-principal-element alloy in the training data was
+homogenized at 950 °C / 24 h.
+
+The model is the vendored CatBoost-SMAs predictor refitted with this campaign's
+alloys added, which is what the campaign itself did after each iteration
+(Section 2.4.1). That matters more than it sounds: the published literature data
+is entirely ternary and quaternary, and **thirteen of this campaign's fourteen
+alloy families never appear in it**, so the `family` categorical feature has
+never seen them. `scripts/train_tt_augmented.py` measures what that is worth,
+grouped 5-fold over the campaign alloys:
+
+| Target | Literature only | Augmented |
+| --- | ---: | ---: |
+| M_s | 69.2 °C | **48.5 °C** |
+| M_f | 65.9 °C | **45.2 °C** |
+| A_s | 96.1 °C | **59.5 °C** |
+| A_f | 96.0 °C | **62.4 °C** |
+
+Roughly 49 °C of error on M_s is large next to the −73 to +399 °C span of the
+measured data. These models rank candidates; they are not pointwise predictors,
+which is how the manuscript uses them.
+
+```bash
+python scripts/train_tt_augmented.py     # recompute the tables above (~40 min)
+```
 
 ## Licensing
 

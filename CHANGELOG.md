@@ -6,6 +6,76 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `scripts/predict_from_composition.py`: predict properties for a single
+  composition in the NiTi(Co,Cu,Pd,Hf,Zr) design space. Reports λ₂, the
+  theoretical transformation strain (as a range, since the LDT model resolves
+  loading direction rather than differences between alloys) and ΔH.
+
+- `scripts/train_tt_augmented.py`: the vendored CatBoost-SMAs
+  transformation-temperature model refitted with this campaign's alloys added,
+  as the campaign itself did after each iteration. The published literature
+  data is entirely ternary and quaternary and thirteen of this campaign's
+  fourteen alloy families never appear in it, so without the campaign alloys
+  the model extrapolates onto families its `family` categorical has never seen.
+  Grouped 5-fold over the 81 campaign alloys, MAE falls from 69.2 to 48.5 °C
+  on M_s and from 96.0 to 62.4 °C on A_f. Exposed through the wrapper's opt-in
+  `--with-temperatures` flag, which defaults to the campaign's 950 °C / 24 h
+  homogenization and warns when a different schedule is supplied.
+
+  This also makes the vendored model runnable under the pandas version this
+  repository pins. CBFV's `extend_features` path takes the median of every
+  column, which pandas 1.5 restricted to numeric columns and pandas 2 does not,
+  so `vendored/CatBoost-SMAs/main.py` cannot run here as written. Generating the
+  composition features alone and reattaching the remaining columns reproduces
+  the pandas 1.5 behaviour, checked against the upstream run recorded in
+  `vendored/CatBoost-SMAs/NOTICE.md` (RMSE 24.8 / MAE 17.2 / R² 0.936 here
+  versus 24.7 / 17.0 / 0.936 there).
+
+- `tests/test_tt_augmented.py`: 13 tests. Twelve are structural and fast --
+  record selection, alloy-family coverage, feature alignment between the
+  training and query matrices, the default processing schedule, and a drift
+  guard that fails if the ported hyperparameters stop matching
+  `vendored/CatBoost-SMAs/main.py`. The thirteenth fits the model once and
+  checks it recovers alloys it was trained on, which takes about seven
+  minutes; its tolerance is deliberately loose, because its job is to catch a
+  pipeline that has stopped working rather than to pin values that move with
+  library versions.
+
+### Fixed
+
+- `data/supplementary_data.xlsx`: corrected two transcription errors, each a
+  single cell, in rows that recorded a martensite finish above the martensite
+  start (`M_f > M_s`, not physically possible). They were the only two such
+  rows of 174, and both were verified against the raw DSC traces by the author
+  who produced the measurements.
+
+  - Ni50Ti25Hf19Zr6, Iteration 3, cycle 2: `M_s` 269.94 -> 369.94 deg C, a
+    wrong digit in the hundreds place. Cycle 1 of the same alloy records
+    370.32 deg C, so the corrected value sits 0.38 deg C from it.
+  - Ni36Ti20Cu12Co2Hf25Zr5, Iteration 2, cycle 2: `M_f` 229.30 -> 164.65 deg C.
+    The published value was identical to that alloy's cycle-1 `A_s`, i.e.
+    copied from the wrong cell.
+
+  Both are documented under "Errata" in `data/README.md`. The corrections
+  shift Table 5's aggregate rho_Ms from 0.429 to 0.439 (Iteration 3: 0.715 to
+  0.733), MAE M_s from 64.69 to 64.28 deg C (Iteration 3: 44.26 to 43.10), MAE
+  DeltaT from 34.36 to 33.13 deg C, and rho_DeltaT from 0.568 to 0.565.
+  rho_Af, rho_DeltaH, MAE A_f, MAE DeltaH, the four-target counts (6/8/6 = 20)
+  and the Pareto-front analysis including its 0.033 tail probability are all
+  unchanged. `tests/expected_values.json` was updated to match.
+
+  With both rows repaired, all 81 transforming alloys now satisfy the ordering
+  filter, where 79 did before, so `scripts/train_tt_augmented.py` trains on 81
+  campaign alloys rather than 79.
+
+- `paper/2026-zadeh-htsma-R1.pdf`: refreshed to the build made from the
+  corrected dataset, so the archived paper and the archived data agree. The
+  previous bundle predated the corrections and still printed the superseded
+  Table 5 values. Byte-identical to the two-column build in the manuscript
+  repository; 43 pages, unchanged.
+
 ## [0.3.7] --- 2026-09-20
 
 ### Changed

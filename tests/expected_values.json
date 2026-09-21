@@ -5,18 +5,18 @@
   "rho_Ms_by_iteration": {
     "Iteration 1": 0.269,
     "Iteration 2": 0.269,
-    "Iteration 3": 0.715
+    "Iteration 3": 0.733
   },
   "table5_rho_all": {
-    "Ms": 0.429,
+    "Ms": 0.439,
     "Af": 0.559,
-    "DT": 0.568,
+    "DT": 0.565,
     "DH": 0.501
   },
   "table5_mae_all": {
-    "Ms": 64.692,
+    "Ms": 64.277,
     "Af": 87.128,
-    "DT": 34.361,
+    "DT": 33.127,
     "DH": 7.267
   },
   "four_pass_by_iteration": {
