@@ -6,6 +6,18 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- `paper/2026-zadeh-htsma-R1.pdf`: refreshed to the manuscript as submitted in
+  revision R1. The previous copy predated the final round of revisions, so the
+  bundled manuscript no longer matched the text the reproduction scripts and
+  tests are checked against. The updated file carries the shortened abstract
+  (now reporting the 48.5% hypervolume expansion), the added mechanism
+  discussion for the small Pd addition and for the hysteresis reduction under
+  load, the measured Ti2Ni area fractions, the septenary sample-size
+  limitation, the measurement-uncertainty discussion, and a condensed
+  Appendix B. Data, scripts and results are unchanged.
+
 ## [0.3.8] --- 2026-09-21
 
 ### Added
